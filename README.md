@@ -1,5 +1,5 @@
 # Awesom-O
-[![Build Status](https://travis-ci.org/clueless-bachu/Awesom-O.svg?branch=iter-dev-1)](https://travis-ci.org/github/clueless-bachu/Awesom-O)
+[![Build Status](https://travis-ci.org/clueless-bachu/Awesom-O.svg?branch=master)](https://travis-ci.org/github/clueless-bachu/Awesom-O)
 [![Coverage Status](https://coveralls.io/repos/github/clueless-bachu/Awesom-O/badge.svg?branch=master)](https://coveralls.io/github/clueless-bachu/Awesom-O?branch=master)
 
 ## MIT Licence 
@@ -36,14 +36,15 @@ We intend on creating a robust set of test cases with:
 * Ubuntu 18.04 (Operating System)
 * Modern C++ 11(Programming Language)
 * CMake (Build System)
-* OpenCV >= 4.4 with dnn and tracking library
+* OpenCV >= 4.4 
+* ROS Melodic
 
 ## License 
 
 ```
 MIT License
 
-Copyright (c) 2020 Sukoon Sarin, Sneha Nayak
+Copyright (c) 2020 Vasista Ayyagari, Vishnuu A. Dhanabalan, Sneha Nayak
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -63,50 +64,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-## Instructions to install Opencv4.4
 
-```
-git clone https://github.com/opencv/opencv.git
-cd opencv
-git checkout 4.4.0
-cd ..
-git clone https://github.com/opencv/opencv_contrib.git
-cd opencv_contrib
-git checkout 4.4.0
-cd ..
-cd opencv
-mkdir build
-cd build
-cmake -D CMAKE_BUILD_TYPE=RELEASE \
--D CMAKE_INSTALL_PREFIX=/usr/local \
--D INSTALL_C_EXAMPLES=OFF \
--D INSTALL_PYTHON_EXAMPLES=OFF \
--D WITH_TBB=ON \
--D WITH_V4L=ON \
--D WITH_QT=ON \
--D WITH_OPENGL=ON \
--D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
--D BUILD_EXAMPLES=OFF ..
-
-make -j$(nproc)
-sudo make install
-sudo sh -c "echo '/usr/local/lib' >> /etc/ld.so.conf.d/opencv.conf"
-sudo ldconfig 
-```
 ## Standard install via command-line
 
 ```
+cd <<Your_catkin_workspace>>/src
 git clone --recursive https://github.com/snehanyk05/Awesom-O/
-cd <path to repository>
-mkdir build
-cd build
-cmake ..
-make
-Run tests: ./test/cpp-test
-Run program: ./app/shell-app 
+cd ../..
+catkin_make
 ```
 
-## Building for code coverage (for assignments beginning in Week 4)
+## Building for code coverage
 ```
 sudo apt-get install lcov
 cmake -D COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug ../
