@@ -1,6 +1,6 @@
 # Awesom-O
-[![Build Status](https://travis-ci.com/snehanyk05/Awesom-O.svg?branch=iter-dev-1)](https://travis-ci.com/github/snehanyk05/Awesom-O)
-[![Coverage Status](https://coveralls.io/repos/github/snehanyk05/Awesom-O/badge.svg?branch=iter-dev-1)](https://coveralls.io/github/snehanyk05/Awesom-O?branch=iter-dev-1)
+[![Build Status](https://travis-ci.org/clueless-bachu/Awesom-O.svg?branch=iter-dev-1)](https://travis-ci.org/github/clueless-bachu/Awesom-O)
+[![Coverage Status](https://coveralls.io/repos/github/clueless-bachu/Awesom-O/badge.svg?branch=master)](https://coveralls.io/github/clueless-bachu/Awesom-O?branch=master)
 
 ## MIT Licence 
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)](LICENSE) 
@@ -18,8 +18,7 @@
 [![Solo Iterative Process](https://img.shields.io/badge/AIP-ClickHere-brightgreen.svg?style=flat)](https://docs.google.com/spreadsheets/d/1xvJm1XwD0x-FWnv0wH0hJFpIkV3F_uvVeWk7_voXG9g/edit?ts=5fc43c5c#gid=0) 
 
 ## Agile Planning
-https://docs.google.com/document/d/148t59oGh6guqHAXvAcwMljHEVtNQom0YHJS6K8PY3m4/edit
-
+https://docs.google.com/document/d/1TP-40cn_BOVU-LJUg8t6y-jqjPbL3MI7luDLiohg9YM/edit?ts=5fc688f2
 
 
 ## Overview
