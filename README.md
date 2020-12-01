@@ -8,8 +8,6 @@
 
 ## Project contibutors
 
-## Project contibutors
-
 1) [Sneha Nayak](https://github.com/snehanyk05)
 2) [Vasista Ayyagari](https://github.com/clueless-bachu)
 3) [Vishnuu A. Dhanabalan](https://github.com/vishnuu95)
