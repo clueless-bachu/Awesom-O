@@ -1,4 +1,4 @@
-# Human Detection and Tracker For ACME's Search and Rescue Drone
+# Awesom-O
 [![Build Status](https://travis-ci.com/snehanyk05/Awesom-O.svg?branch=iter-dev-1)](https://travis-ci.com/github/snehanyk05/Awesom-O)
 [![Coverage Status](https://coveralls.io/repos/github/snehanyk05/Awesom-O/badge.svg?branch=iter-dev-1)](https://coveralls.io/github/snehanyk05/Awesom-O?branch=iter-dev-1)
 
