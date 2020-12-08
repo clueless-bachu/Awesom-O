@@ -1,6 +1,8 @@
 /**
  * @file Controller.h
  * @author Sneha Nayak
+ * @author Vishnuu
+ * @author Vasista
  * @brief
  * @date 2020-12-01
  * @copyright Copyright (c) 2020

@@ -1,4 +1,20 @@
+/**
+ * @file TargetGen.cpp
+ * @author Sneha Nayak
+ * @author Vishnuu
+ * @author Vasista
+ * @brief
+ * @date 2020-12-01
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #include "TargetGen.h"
+
+/**
+* @brief getPosition method which is a service callback
+* @param req for service
+* @return response for service
+*/
 bool TargetGen::getPositions(awesomo::boxes::Request &req,
 	awesomo::boxes::Response &res)
 {
@@ -10,6 +26,12 @@ bool TargetGen::getPositions(awesomo::boxes::Request &req,
 	// res.positions = positions;
 	return true;
 }
+
+/**
+* @brief Constructor
+* @param None
+* @return None
+*/
 TargetGen::TargetGen(const ros::NodeHandle& n):
 	nh_(n)
 {
@@ -18,6 +40,11 @@ TargetGen::TargetGen(const ros::NodeHandle& n):
     ROS_INFO("Inside constructor");
 }
 
+/**
+* @brief Destructor
+* @param None
+* @return None
+*/
 TargetGen::~TargetGen() {
 }
 
@@ -26,6 +53,11 @@ TargetGen::~TargetGen() {
 
 
 
+/**
+* @brief Main file for targetGeneration
+* @param argc, argv
+* @return int
+*/
 int main( int argc, char** argv ) {
 	ros::init(argc, argv, "targetgen");
     ros::NodeHandle nh;

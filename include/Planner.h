@@ -1,8 +1,10 @@
 /**
  * @file Planner.h
  * @author Sneha Nayak
+ * @author Vishnuu
+ * @author Vasista
  * @brief
- * @date 2020-12-08
+ * @date 2020-12-01
  * @copyright Copyright (c) 2020
  * 
  */
