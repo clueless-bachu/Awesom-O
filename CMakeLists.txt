@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(awesom-o)
+project(awesomo)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -57,11 +57,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  boxes.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -73,9 +72,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
    DEPENDENCIES
+   std_msgs
    geometry_msgs
    sensor_msgs
-   std_msgs
 )
 
 ## Declare a catkin package
@@ -86,15 +85,18 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 
 add_executable(Planner src/Planner.cpp)
 target_link_libraries(Planner ${catkin_LIBRARIES})
-add_dependencies(Planner awesom-o_generate_messages_cpp)
+add_dependencies(Planner awesomo_generate_messages_cpp)
 
 add_executable(Controller src/Controller.cpp)
 target_link_libraries(Controller ${catkin_LIBRARIES})
-add_dependencies(Controller awesom-o_generate_messages_cpp)
+add_dependencies(Controller awesomo_generate_messages_cpp)
 
-add_executable(TargetGen src/TargetGen.cpp)
-target_link_libraries(TargetGen ${catkin_LIBRARIES})
-add_dependencies(TargetGen awesom-o_generate_messages_cpp)
+
+add_executable(targetgen src/TargetGen.cpp)
+target_link_libraries(targetgen ${catkin_LIBRARIES})
+add_dependencies(targetgen awesomo_generate_messages_cpp)
+# add_e13
+# add_dependencies(add_two_ints_client beginner_tutorials_gencpp)
 
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)

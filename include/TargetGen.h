@@ -14,6 +14,7 @@
 #include <math.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/TwistStamped.h>
+#include <awesomo/boxes.h>
 
 class TargetGen {
 private:
