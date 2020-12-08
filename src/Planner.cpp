@@ -2,11 +2,11 @@
 Planner::Planner(const ros::NodeHandle& n):
 	nh_(n)
 {
-    sub_ar_pos_ = this->nh_.subscribe("/ar_pose_marker", 1, &Planner::ARCallback, this);
-    sub_pos_ = this->nh_.subscribe("/odom", 1, &Planner::PoseCallback, this);
+    sub_ar_pos_ = nh_.subscribe("/ar_pose_marker", 1, &Planner::ARCallback, this);
+    sub_pos_ = nh_.subscribe("/odom", 1, &Planner::PoseCallback, this);
     
-	pub_cmd_vel_ = this->nh_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
-    pub_goal_ = this->nh_.advertise<geometry_msgs::PoseStamped>("/move_base_simple/goal", 1);
+	pub_cmd_vel_ = nh_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
+    pub_goal_ = nh_.advertise<geometry_msgs::PoseStamped>("/move_base_simple/goal", 1);
 }
 
 Planner::~Planner() {
