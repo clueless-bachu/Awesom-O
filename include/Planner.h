@@ -13,6 +13,8 @@
 #include <iostream>
 #include <math.h>
 #include <ar_track_alvar_msgs/AlvarMarkers.h>
+#include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/TwistStamped.h>
 #include <sensor_msgs/LaserScan.h>
 
 class Planner {
@@ -30,6 +32,7 @@ private:
 	// Publishers
     // Publishes goal for controller node
 	ros::Publisher pub_goal_;
+	ros::Publisher pub_cmd_vel_;
 	
     //variables
     int wayPointCount_;
