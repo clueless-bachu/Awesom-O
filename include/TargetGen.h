@@ -42,7 +42,8 @@ public:
 	*	@brief 
 	*	@param msg - 
 	*/
-	std::vector<std::vector<float>> getPositions(int locations_count);
+static bool getPositions(awesomo::boxes::Request &req,
+		awesomo::boxes::Response &res);
 	
 };
 #endif // INCLUDE_TARGETGEN_H
