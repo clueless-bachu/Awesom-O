@@ -48,7 +48,7 @@ public:
 	*	@brief 
 	*	@param msg - 
 	*/
-	void PosCallback(const geometry_msgs::PoseStamped::ConstPtr &data);
+	void PoseCallback(const geometry_msgs::PoseStamped::ConstPtr &data);
 	/*
 	*	@brief 
 	*	@param msg - 
