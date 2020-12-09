@@ -98,3 +98,8 @@ Generated doxygen files are in html format and you can find them in ./docs folde
 cd docs
 cd html
 google-chrome index.html
+```
+## Run Tests 
+```
+catkin_make run_tests_awesomo
+```
