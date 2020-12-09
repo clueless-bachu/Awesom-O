@@ -9,37 +9,35 @@
  * 
  */
 #include "TargetGen.h"
-
 /**
 * @brief getPosition method which is a service callback
 * @param req for service
 * @return response for service
 */
 bool TargetGen::getPositions(awesomo::boxes::Request &req,
-	awesomo::boxes::Response &res)
-{
-	int num = req.numBoxes;
-	// vector<float> positions;
-	for (auto i = 0; i < 2*num; i++) {
-		res.positions.push_back((static_cast<float>(std::rand())/(RAND_MAX))*(5) - 2.5);
-	}
-	// res.positions = positions;
-	return true;
+    awesomo::boxes::Response &res) {
+    int num = req.numBoxes;
+    // vector<float> positions;
+    for (auto i = 0; i < 2*num; i++) {
+        res.positions.push_back
+                ((static_cast<float>(std::rand())/(RAND_MAX))*(5) - 2.5);
+    }
+    // res.positions = positions;
+    return true;
 }
-
 /**
 * @brief Constructor
 * @param None
 * @return None
 */
 TargetGen::TargetGen(const ros::NodeHandle& n):
-	nh_(n)
-{
-    pub_poses_ = nh_.advertise<geometry_msgs::PoseStamped>("/targets", 1);
-    ros::ServiceServer service = nh_.advertiseService("getPositions", this->getPositions);
+    nh_(n) {
+    pub_poses_ = nh_.advertise<geometry_msgs::PoseStamped>
+                                            ("/targets", 1);
+    ros::ServiceServer service = nh_.advertiseService
+                        ("getPositions", this->getPositions);
     ROS_INFO("Inside constructor");
 }
-
 /**
 * @brief Destructor
 * @param None
@@ -47,19 +45,13 @@ TargetGen::TargetGen(const ros::NodeHandle& n):
 */
 TargetGen::~TargetGen() {
 }
-
-
-
-
-
-
 /**
 * @brief Main file for targetGeneration
 * @param argc, argv
 * @return int
 */
-int main( int argc, char** argv ) {
-	ros::init(argc, argv, "targetgen");
+int main(int argc, char** argv) {
+    ros::init(argc, argv, "targetgen");
     ros::NodeHandle nh;
     TargetGen targetGen(nh);
     ROS_INFO("TargetGen node initiated");

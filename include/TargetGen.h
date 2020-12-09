@@ -27,26 +27,26 @@ private:
     
     // Publishers
     // Publishes 
-	ros::Publisher pub_poses_;
-	
+    ros::Publisher pub_poses_;
+    
 
 
 public:
-	/*
-	*	@brief Default constructor for TargetGen object
-	*	@param n -  Ros node handle reference
-	*/
-	TargetGen(const ros::NodeHandle& n);
-	/*
-	*	@brief Default destructor
-	*/
-	~TargetGen();
-	/*
-	*	@brief 
-	*	@param msg - 
-	*/
+    /*
+    *   @brief Default constructor for TargetGen object
+    *   @param n -  Ros node handle reference
+    */
+    TargetGen(const ros::NodeHandle& n);
+    /*
+    *   @brief Default destructor
+    */
+    ~TargetGen();
+    /*
+    *   @brief 
+    *   @param msg - 
+    */
 static bool getPositions(awesomo::boxes::Request &req,
-		awesomo::boxes::Response &res);
-	
+        awesomo::boxes::Response &res);
+    
 };
 #endif // INCLUDE_TARGETGEN_H

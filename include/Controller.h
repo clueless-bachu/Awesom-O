@@ -27,14 +27,14 @@ private:
     // Subscribers
     
     // Subscribes to 
-	ros::Subscriber sub_goal_;
-	ros::Subscriber sub_pos_;
+    ros::Subscriber sub_goal_;
+    ros::Subscriber sub_pos_;
 
-	// Publishers
+    // Publishers
     // Publishes 
-	ros::Publisher pub_cmd_vel_;
-	
-	float kp_;            // P gain
+    ros::Publisher pub_cmd_vel_;
+    
+    float kp_;            // P gain
     float ki_;            // I gain
     float kd_;            // D gain
     float prev_error_;      // Previous error
@@ -44,27 +44,27 @@ private:
     int Integrator, Derivator, Integrator_max, Integrator_min;
 
 public:
-	/*
-	*	@brief Default constructor for Controller object
-	*	@param n -  Ros node handle reference
-	*/
-	Controller(const ros::NodeHandle& n);
-	/*
-	*	@brief Default destructor
-	*/
-	~Controller();
-	
-	/*
-	*	@brief 
-	*	@param msg - 
-	*/
-	void PoseCallback(const geometry_msgs::PoseStamped::ConstPtr &data);
-	/*
-	*	@brief 
-	*	@param msg - 
-	*/
-	void GoalCallback(const geometry_msgs::PoseStamped::ConstPtr& msg);
-	void setGains(float kp, float ki, float kd);
-	float control(float input);
+    /*
+    *   @brief Default constructor for Controller object
+    *   @param n -  Ros node handle reference
+    */
+    Controller(const ros::NodeHandle& n);
+    /*
+    *   @brief Default destructor
+    */
+    ~Controller();
+    
+    /*
+    *   @brief 
+    *   @param msg - 
+    */
+    void PoseCallback(const geometry_msgs::PoseStamped::ConstPtr &data);
+    /*
+    *   @brief 
+    *   @param msg - 
+    */
+    void GoalCallback(const geometry_msgs::PoseStamped::ConstPtr& msg);
+    void setGains(float kp, float ki, float kd);
+    float control(float input);
 };
 #endif // INCLUDE_CONTROLLER_H
