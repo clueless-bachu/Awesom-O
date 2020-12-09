@@ -1,0 +1,3 @@
+int32 numBoxes
+---
+float32[] positions

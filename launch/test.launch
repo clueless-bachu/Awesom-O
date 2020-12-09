@@ -1,0 +1,6 @@
+<launch>
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+    	<arg name="world_name" value="test_world_1.world"/>
+	</include>
+	<include file="$(find gazebo_test_pkg)/launch/boxes.launch"/>
+</launch>
