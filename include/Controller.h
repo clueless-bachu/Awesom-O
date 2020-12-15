@@ -14,9 +14,17 @@
 #include <ros/ros.h>
 #include <iostream>
 #include <math.h>
+#include <tf/tf.h>
 #include <sensor_msgs/LaserScan.h>
+#include <geometry_msgs/Pose2D.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/TwistStamped.h>
+#include <nav_msgs/Odometry.h>
+#include <geometry_msgs/Twist.h>
+#include <std_msgs/Bool.h>
+#include <tf/transform_datatypes.h>
+#include <tf2/LinearMath/Quaternion.h>
+#include <PID.h>
 
 class Controller {
 private:
@@ -33,15 +41,15 @@ private:
     // Publishers
     // Publishes 
     ros::Publisher pub_cmd_vel_;
+    ros::Publisher pub_goal_ack_;
     
-    float kp_;            // P gain
-    float ki_;            // I gain
-    float kd_;            // D gain
-    float prev_error_;      // Previous error
-    double P_term_;          // Proportional term
-    double I_term_;          // Integral term
-    double D_term_;          // Differential term
-    int Integrator, Derivator, Integrator_max, Integrator_min;
+
+    bool set_point_received_ = false;
+    geometry_msgs::Pose2D pose_, set_point_;
+    PID pid_x_ = PID(0.7,0,0);
+    PID pid_yaw_ = PID(1.4,0,0);
+    double theta_;
+
 
 public:
     /*
@@ -58,13 +66,18 @@ public:
     *   @brief 
     *   @param msg - 
     */
-    void PoseCallback(const geometry_msgs::PoseStamped::ConstPtr &data);
+    void PoseCallback(const nav_msgs::Odometry::ConstPtr &data);
     /*
     *   @brief 
     *   @param msg - 
     */
-    void GoalCallback(const geometry_msgs::PoseStamped::ConstPtr& msg);
-    void setGains(float kp, float ki, float kd);
-    float control(float input);
+    void GoalCallback(const geometry_msgs::Pose2D::ConstPtr& msg);
+    double euclidean_distance(geometry_msgs::Pose2D goal_pose);
+    double steering_angle(geometry_msgs::Pose2D goal_pose);
+    double angular_vel(geometry_msgs::Pose2D goal_pose);
+    void angular_controller(geometry_msgs::Pose2D goal_pose);
+    void distance_controller(geometry_msgs::Pose2D goal_pose);
+    void move_bot(bool TEST=false);
+    
 };
 #endif // INCLUDE_CONTROLLER_H
