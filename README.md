@@ -17,7 +17,12 @@
 
 ## Agile Planning
 https://docs.google.com/document/d/1TP-40cn_BOVU-LJUg8t6y-jqjPbL3MI7luDLiohg9YM/edit?ts=5fc688f2
-
+## Link to Presentation Slides
+https://docs.google.com/presentation/d/1zoR2qmA_PsgM87A83aFrFod_hp6GY0hheZv6_P0coQ0/edit?usp=sharing
+## Link to Presentation Video
+https://drive.google.com/drive/folders/1QhVnbJzgOnSTSSQTxaUrr-i40nOv9kYT?usp=sharing
+## Link to Demo
+https://www.youtube.com/watch?v=feeuLlQeejQ
 
 ## Overview
 
