@@ -1,4 +1,4 @@
 <launch>
-    <node pkg="awesom-o" name="Planner" type="Planner" />
-    <test pkg="awesom-o" test-name="testAwesomO" type="testAwesomO" />
+    <node pkg="awesomo" name="Planner" type="Planner" />
+    <test pkg="awesomo" test-name="testAwesomO" type="testAwesomO" />
 </launch>
