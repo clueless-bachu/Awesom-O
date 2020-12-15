@@ -1,22 +1,31 @@
 <launch>
 	<group ns="robot1">
 		<param name="tf_prefix" value="robot1"/>
-		<include file="$(find gazebo_test_pkg)/launch/box.launch">
-			<arg name="x_pos" value="-5"/>
-			<arg name="y_pos" value="-5"/>
-			<arg name="z_pos" value="0"/>
+		<include file="$(find awesomo)/launch/box.launch">
+			<arg name="x_pos" value="-2.5"/>
+			<arg name="y_pos" value="0"/>
+			<arg name="z_pos" value="0.25"/>
 			<arg name="robot_num" value="1"/>
 		</include>
 	</group>
 
-	<group ns="robot2">
-		<param name="tf_prefix" value="robot1"/>
-		<include file="$(find gazebo_test_pkg)/launch/box.launch">
-			<arg name="x_pos" value="5"/>
-			<arg name="y_pos" value="5"/>
-			<arg name="z_pos" value="0"/>
+	<!-- <group ns="robot2">
+		<param name="tf_prefix" value="robot2"/>
+		<include file="$(find awesomo)/launch/box.launch">
+			<arg name="x_pos" value="2.5"/>
+			<arg name="y_pos" value="1.5"/>
+			<arg name="z_pos" value="0.25"/>
 			<arg name="robot_num" value="2"/>
 		</include>
 	</group>
 
+	<group ns="robot3">
+		<param name="tf_prefix" value="robot3"/>
+		<include file="$(find awesomo)/launch/box.launch">
+			<arg name="x_pos" value="-2.5"/>
+			<arg name="y_pos" value="-1.5"/>
+			<arg name="z_pos" value="0.25"/>
+			<arg name="robot_num" value="3"/>
+		</include>
+	</group> -->
 </launch>
