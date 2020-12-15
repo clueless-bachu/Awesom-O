@@ -13,11 +13,21 @@
 
 #include <ros/ros.h>
 #include <iostream>
+#include <queue>
+#include <set>
+#include <vector>
 #include <math.h>
 #include <ar_track_alvar_msgs/AlvarMarkers.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/TwistStamped.h>
+#include <geometry_msgs/Point.h>
+#include <geometry_msgs/Pose2D.h>
+#include <nav_msgs/Odometry.h>
 #include <sensor_msgs/LaserScan.h>
+#include <std_msgs/Bool.h>
+#include <tf/transform_listener.h>
+#include <tf/tf.h> 
+#include <tf/transform_datatypes.h>
 
 class Planner {
 private:
@@ -30,6 +40,7 @@ private:
     // Subscribes to 
     ros::Subscriber sub_ar_pos_;
     ros::Subscriber sub_pos_;
+    ros::Subscriber sub_reached_flag_;
 
     // Publishers
     // Publishes goal for controller node
@@ -38,13 +49,25 @@ private:
     
     //variables
     int wayPointCount_;
+    std::queue<geometry_msgs::Pose2D> targets_queue_;
+    std::set<int> detected_targets_;
+    geometry_msgs::PoseStamped curr_pose_;
+    tf::TransformListener listener_;
+    geometry_msgs::Point robot_position_;
+    std::queue<geometry_msgs::Pose2D> waypoints_;
+    bool reached_target_flag_;
+    bool mission_complete_;
+    bool useVision;
+    int num_targets_;
+
+    float x_pos, y_pos;
 
 public:
     /*
     *   @brief Default constructor for Planner object
     *   @param n -  Ros node handle reference
     */
-    Planner(const ros::NodeHandle& n);
+    Planner(const ros::NodeHandle&, bool);
     /*
     *   @brief Default destructor
     */
@@ -53,17 +76,21 @@ public:
     *   @brief 
     *   @param msg - 
     */
-    void PoseCallback(const geometry_msgs::PoseStamped::ConstPtr &data);
+    void aRCallback(const ar_track_alvar_msgs::AlvarMarkers::ConstPtr &msg);
     /*
     *   @brief 
     *   @param msg - 
     */
-    void ARCallback(const ar_track_alvar_msgs::AlvarMarkers::ConstPtr &msg);
+    void threatCallback(const geometry_msgs::Pose2D::ConstPtr &data);
     /*
     *   @brief 
     *   @param msg - 
     */
-    void getNextPoint(const std::vector<std::vector<float>> &points);
-    
+    void run(bool TEST=false);
+    /*
+    *   @brief 
+    *   @param msg - 
+    */
+    void flagCallBack(const nav_msgs::Odometry::ConstPtr &data);
 };
 #endif // INCLUDE_PLANNER_H
