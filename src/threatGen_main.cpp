@@ -22,8 +22,8 @@ int main(int argc, char** argv) {
     ROS_INFO("threatGenerator node initilizing");
     bool useDetector;
     std::string arg(argv[1]);
-    if(arg == "true") {
-        useDetector= false;
+    if (arg == "true") {
+        useDetector = false;
     } else {
         useDetector = true;
     }

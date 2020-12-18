@@ -98,13 +98,11 @@ Planner::Planner(const ros::NodeHandle& n, bool useVision):
 * @param None
 * @return None
 */
-Planner::~Planner() { // done
+Planner::~Planner() {  // done
 }
 
 void Planner::threatCallback(const geometry_msgs::Pose2D::ConstPtr &data) {
-    
-    if(detected_targets_.find(data->theta) == detected_targets_.end())
-    {
+    if (detected_targets_.find(data->theta) == detected_targets_.end()) {
         this->detected_targets_.insert(data->theta);
         this->targets_queue_.push(*data);
     }
@@ -114,37 +112,36 @@ void Planner::threatCallback(const geometry_msgs::Pose2D::ConstPtr &data) {
 * @param Artag custom msg
 * @return None
 */
-void Planner::aRCallback 
-(const ar_track_alvar_msgs::AlvarMarkers::ConstPtr &msg) { // done
-    // if message not empty, 
+void Planner::aRCallback
+(const ar_track_alvar_msgs::AlvarMarkers::ConstPtr &msg) {  // done
+    // if message not empty,
     if (msg == NULL) {
         return;
     }
     // run for loop over every artag marker
     for (int i = 0; i < msg->markers.size(); i++) {
     // if id not in set, push world coordinate of tag to queue
-        if (!detected_targets_.count(static_cast<int>(msg->markers[i].id)) && msg->markers[i].id != 0) {
-
+        if (!detected_targets_.count(static_cast<int>(msg->markers[i].id))
+                                    && msg->markers[i].id != 0) {
             tf::StampedTransform transform;
-            try
-            {
+            try {
                 ros::Time now = ros::Time::now();
-                std::string x = "ar_marker_" + std::to_string(msg->markers[i].id);
+                std::string x = "ar_marker_" +
+                 std::to_string(msg->markers[i].id);
                 // std::cout<<(x);
                 // ROS_INFO_STREAM(x);
                 listener_.waitForTransform("odom", x,
                 ros::Time(0), ros::Duration(10.0));
                 listener_.lookupTransform("/odom", "/" + x,
                 ros::Time(0), transform);
-                geometry_msgs::Pose2D global_position; 
+                geometry_msgs::Pose2D global_position;
                 global_position.x = transform.getOrigin().x();
                 global_position.y = transform.getOrigin().y();
                 // ROS_INFO_STREAM(global_position.x<<","<<global_position.y);
                 targets_queue_.push(global_position);
                 detected_targets_.insert(msg->markers[i].id);
             }
-            catch (tf::TransformException ex)
-            {
+            catch (tf::TransformException ex) {
                 ROS_ERROR("%s", ex.what());
                 ros::Duration(1.0).sleep();
             }
@@ -158,52 +155,49 @@ void Planner::aRCallback
 * @return None
 */
 void Planner::run(bool TEST) {
-
     ROS_INFO("Planner node initilized!");
     int counter = 0;
     geometry_msgs::Pose2D waypoint;
     std::vector<geometry_msgs::Pose2D> local_waypoints;
-    while (nh_.ok() && !mission_complete_ && (!waypoints_.empty() || local_waypoints.size()!=0)) {
+    while (nh_.ok() && !mission_complete_ &&
+     (!waypoints_.empty() || local_waypoints.size()!= 0)) {
         counter++;
-
-        if(TEST == true && counter < 10)
+        if (TEST == true && counter < 10)
             return;
 
-        if(local_waypoints.size() >0 && sqrt(pow((x_pos - local_waypoints[0].x), 2) +
-                pow((y_pos - local_waypoints[0].y), 2)) <0.5)
-        {
+        if (local_waypoints.size() > 0
+                && sqrt(pow((x_pos - local_waypoints[0].x), 2) +
+                pow((y_pos - local_waypoints[0].y), 2)) <0.5) {
             ROS_INFO("Waypoint reached:");
-            std::cout<< local_waypoints[0].x <<", " <<local_waypoints[0].y<<std::endl;
+            std::cout<< local_waypoints[0].x << ", " << local_waypoints[0].y
+                        <<std::endl;
             ROS_INFO("waypoint removed");
             local_waypoints.erase(local_waypoints.begin());
-
         }
-        if(!targets_queue_.empty()) {
-            local_waypoints.insert(local_waypoints.begin(), targets_queue_.front());
+        if (!targets_queue_.empty()) {
+            local_waypoints.insert(local_waypoints.begin(),
+                     targets_queue_.front());
             targets_queue_.pop();
             ROS_INFO("Added threat to local list of waypoints");
         }
         pub_goal_.publish(local_waypoints[0]);
         ros::Duration(0.5).sleep();
-        if(local_waypoints.size() == 0 && !waypoints_.empty())
-        {
+        if (local_waypoints.size() == 0 && !waypoints_.empty()) {
             ROS_INFO("waypoint added to local list");
             local_waypoints.push_back(waypoints_.front());
             waypoints_.pop();
         }
-
         ros::spinOnce();
-        if (detected_targets_.size() == num_targets_ && local_waypoints.size()== 0) {
+        if (detected_targets_.size() == num_targets_
+                         && local_waypoints.size()== 0) {
                     mission_complete_ = true;
         }
     }
     if (mission_complete_) {
         ROS_INFO("MISSION COMPLETE! : Found all targets.");
-    }
-    else {
+    } else {
         ROS_INFO("MISSION FAILED! : All targets were not found during search.");
     }
-    
 }
 
 /**
@@ -212,9 +206,6 @@ void Planner::run(bool TEST) {
 * @return None
 */
 void Planner::flagCallBack(const nav_msgs::Odometry::ConstPtr &data) {
-
     x_pos = data->pose.pose.position.x;
     y_pos = data->pose.pose.position.y;
 }
-
-

@@ -21,8 +21,8 @@ int main(int argc, char** argv) {
     ros::init(argc, argv, "planner");
     bool useVision;
     std::string arg(argv[1]);
-    if(arg == "true") {
-        useVision= true;
+    if (arg == "true") {
+        useVision = true;
     } else {
         useVision = false;
     }
