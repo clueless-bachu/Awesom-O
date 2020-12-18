@@ -1,5 +1,5 @@
 /**
- * @file Controller.cpp
+ * @file Controller_main.cpp
  * @author Sneha Nayak
  * @author Vishnuu
  * @author Vasista
@@ -16,8 +16,7 @@
 * @param argc, argv
 * @return 0
 */
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     ros::init(argc, argv, "controller");
     ros::NodeHandle nh;
     Controller controller(nh);

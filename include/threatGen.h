@@ -1,5 +1,5 @@
 /**
- * @file Planner.h
+ * @file threatGen.h
  * @author Sneha Nayak
  * @author Vishnuu
  * @author Vasista
@@ -28,22 +28,43 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+* @brief Class ThreatGen to generate targets randomly
+*/
 class ThreatGen {
  private:
 
- 	ros::NodeHandle nh;
+    ros::NodeHandle nh;
 
- 	ros::Subscriber sub_pos;
- 	ros::Publisher pub_threat;
- 	int n;
- 	double threshold;
- 	bool useDetector;
- 	std::vector<std::vector<double>> threats;
+    ros::Subscriber sub_pos;
+    ros::Publisher pub_threat;
+    int n;
+    double threshold;
+    bool useDetector;
+    std::vector<std::vector<double>> threats;
  public:
- 	ThreatGen(const ros::NodeHandle&, int, double, bool);
- 	~ThreatGen();
- 	void generateTargets(bool TEST=false);
- 	void poseCallback(const nav_msgs::Odometry::ConstPtr &data);
+/**
+* @brief ThreatGen constructor.
+* @param Node handle, int value for number of targets, double threshold
+* bool flag
+*/      
+    ThreatGen(const ros::NodeHandle&, int, double, bool);
+/**
+* @brief ThreatGen destructor
+* @param None
+*/      
+
+    ~ThreatGen();
+/**
+* @brief generateTargets spawns multiple targets into gazebo world
+* @param bool for Test cases
+*/  
+    void generateTargets(bool TEST=false);
+/**
+* @brief poseCallBack is a call back function for ros subscriber.
+* @param nav_msgs::Odometry
+*/  
+    void poseCallback(const nav_msgs::Odometry::ConstPtr &data);
 
 
 };

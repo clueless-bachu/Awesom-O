@@ -1,7 +1,21 @@
+/**
+ * @file test_PID.cpp
+ * @author Sneha Nayak
+ * @author Vishnuu
+ * @author Vasista
+ * @brief Class tests the PID module
+ * @date 2020-12-01
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #include <gtest/gtest.h>
 #include <ros/ros.h>
 #include <PID.h>
 
+/**
+* @brief checPID TestCase
+* @param None
+*/
 TEST(PIDTest, checkPID)
 {
 

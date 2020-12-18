@@ -16,76 +16,74 @@
 */
 Planner::Planner(const ros::NodeHandle& n, bool useVision):
     nh_(n) {
-
     pub_goal_ = nh_.advertise<geometry_msgs::Pose2D>
                                 ("/move_base_simple/goal", 1);
     sub_reached_flag_ = nh_.subscribe("/odom", 1,
                                 &Planner::flagCallBack, this);
     this->useVision = useVision;
     std::cout<< this->useVision << std::endl;
-    if(!this->useVision) {
+    if (!this->useVision) {
         sub_ar_pos_ = nh_.subscribe("/threat", 1,
                                 &Planner::threatCallback, this);
     } else {
         sub_ar_pos_ = nh_.subscribe("/ar_pose_marker", 1,
                                 &Planner::aRCallback, this);
     }
-    
     this->mission_complete_ = false;
     this->num_targets_ = 3;
 
     std::vector<std::vector<double>> pwaypoints = {
-    	{-3,3},
-    	{-3,2},
-    	{-3,1},
-    	{-3,0},
-        {-3,-1},
-        {-3,-2},
-        {-3,-3},
-        {-2,-3},
-        {-2,-2},
-        {-2,-1},
-        {-2,0},
-        {-2,1},
-        {-2,2},
-        {-2,3},
-        {-1,3},
-        {-1,2},
-        {-1,1},
-        {-1,0},
-        {-1,-1},
-        {-1,-2},
-        {-1,-3},
-        {0,-3},
-        {0,-2},
-        {0,-1},
-        {0,0},
-        {0,1},
-        {0,2},
-        {0,3},
-        {1,3},
-        {1,2},
-        {1,1},
-        {1,0},
-        {1,-1},
-        {1,-2},
-        {1,-3},
-        {2,-3},
-        {2,-2},
-        {2,-1},
-        {2,0},
-        {2,1},
-        {2,2},
-        {2,3},
-        {3,3},
-        {3,2},
-        {3,1},
-        {3,0},
-        {3,-1},
-        {3,-2},
-        {3,-3},
+        {-3, 3},
+        {-3, 2},
+        {-3, 1},
+        {-3, 0},
+        {-3, -1},
+        {-3, -2},
+        {-3, -3},
+        {-2, -3},
+        {-2, -2},
+        {-2, -1},
+        {-2, 0},
+        {-2, 1},
+        {-2, 2},
+        {-2, 3},
+        {-1, 3},
+        {-1, 2},
+        {-1, 1},
+        {-1, 0},
+        {-1, -1},
+        {-1, -2},
+        {-1, -3},
+        {0, -3},
+        {0, -2},
+        {0, -1},
+        {0, 0},
+        {0, 1},
+        {0, 2},
+        {0, 3},
+        {1, 3},
+        {1, 2},
+        {1, 1},
+        {1, 0},
+        {1, -1},
+        {1, -2},
+        {1, -3},
+        {2, -3},
+        {2, -2},
+        {2, -1},
+        {2, 0},
+        {2, 1},
+        {2, 2},
+        {2, 3},
+        {3, 3},
+        {3, 2},
+        {3, 1},
+        {3, 0},
+        {3, -1},
+        {3, -2},
+        {3, -3},
     };
-    for(auto i: pwaypoints){
+    for (auto i : pwaypoints) {
         geometry_msgs::Pose2D temp;
         temp.x = i[0];
         temp.y = i[1];
@@ -171,33 +169,33 @@ void Planner::run(bool TEST) {
         if(TEST == true && counter < 10)
             return;
 
-    	if(local_waypoints.size() >0 && sqrt(pow((x_pos - local_waypoints[0].x), 2) +
+        if(local_waypoints.size() >0 && sqrt(pow((x_pos - local_waypoints[0].x), 2) +
                 pow((y_pos - local_waypoints[0].y), 2)) <0.5)
-    	{
+        {
             ROS_INFO("Waypoint reached:");
             std::cout<< local_waypoints[0].x <<", " <<local_waypoints[0].y<<std::endl;
-    		ROS_INFO("waypoint removed");
-    		local_waypoints.erase(local_waypoints.begin());
+            ROS_INFO("waypoint removed");
+            local_waypoints.erase(local_waypoints.begin());
 
-    	}
-    	if(!targets_queue_.empty()) {
-    		local_waypoints.insert(local_waypoints.begin(), targets_queue_.front());
-    		targets_queue_.pop();
+        }
+        if(!targets_queue_.empty()) {
+            local_waypoints.insert(local_waypoints.begin(), targets_queue_.front());
+            targets_queue_.pop();
             ROS_INFO("Added threat to local list of waypoints");
-    	}
-    	pub_goal_.publish(local_waypoints[0]);
-    	ros::Duration(0.5).sleep();
-    	if(local_waypoints.size() == 0 && !waypoints_.empty())
-    	{
-    		ROS_INFO("waypoint added to local list");
-    		local_waypoints.push_back(waypoints_.front());
-    		waypoints_.pop();
-    	}
+        }
+        pub_goal_.publish(local_waypoints[0]);
+        ros::Duration(0.5).sleep();
+        if(local_waypoints.size() == 0 && !waypoints_.empty())
+        {
+            ROS_INFO("waypoint added to local list");
+            local_waypoints.push_back(waypoints_.front());
+            waypoints_.pop();
+        }
 
         ros::spinOnce();
         if (detected_targets_.size() == num_targets_ && local_waypoints.size()== 0) {
                     mission_complete_ = true;
-		}
+        }
     }
     if (mission_complete_) {
         ROS_INFO("MISSION COMPLETE! : Found all targets.");

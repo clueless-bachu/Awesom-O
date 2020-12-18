@@ -61,22 +61,52 @@ public:
     *   @brief Default destructor
     */
     ~Controller();
-    
     /*
     *   @brief 
     *   @param msg - 
     */
     void PoseCallback(const nav_msgs::Odometry::ConstPtr &data);
-    /*
-    *   @brief 
-    *   @param msg - 
+    /**
+    * @brief GoalCallback method
+    * @param PoseStamped msg
+    * @return None
     */
     void GoalCallback(const geometry_msgs::Pose2D::ConstPtr& msg);
+    /**
+    * @brief euclidean_distance calculator
+    * @param goal_pose - geometry_msgs
+    * @return double
+    */
     double euclidean_distance(geometry_msgs::Pose2D goal_pose);
+    /**
+    * @brief steering_angle calculator
+    * @param goal_pose - geometry_msgs
+    * @return double
+    */
     double steering_angle(geometry_msgs::Pose2D goal_pose);
+    /**
+    * @brief angular_vel calculator
+    * @param goal_pose - geometry_msgs
+    * @return double
+    */
     double angular_vel(geometry_msgs::Pose2D goal_pose);
+    /**
+    * @brief angular_controller 
+    * @param goal_pose - geometry_msgs
+    * @return None
+    */
     void angular_controller(geometry_msgs::Pose2D goal_pose);
+    /**
+    * @brief distance_controller 
+    * @param goal_pose - geometry_msgs
+    * @return None
+    */
     void distance_controller(geometry_msgs::Pose2D goal_pose);
+    /**
+    * @brief move_bot
+    * @param bool for 
+    * @return None
+    */
     void move_bot(bool TEST=false);
     
 };

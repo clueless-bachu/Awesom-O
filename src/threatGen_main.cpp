@@ -1,5 +1,5 @@
 /**
- * @file Planner.cpp
+ * @file threatGen_main.cpp
  * @author Sneha Nayak
  * @author Vishnuu
  * @author Vasista
@@ -11,9 +11,13 @@
 #include "threatGen.h"
 
 
-
+/**
+* @brief main
+* @param argc, argv
+* @return 0
+*/
 int main(int argc, char** argv) {
-	ros::init(argc, argv, "threatGenerator");
+    ros::init(argc, argv, "threatGenerator");
     ros::NodeHandle nh;
     ROS_INFO("threatGenerator node initilizing");
     bool useDetector;

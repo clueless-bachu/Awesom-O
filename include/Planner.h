@@ -66,6 +66,7 @@ public:
     /*
     *   @brief Default constructor for Planner object
     *   @param n -  Ros node handle reference
+    *   @param bool - TEST case flag
     */
     Planner(const ros::NodeHandle&, bool);
     /*
@@ -73,23 +74,26 @@ public:
     */
     ~Planner();
     /*
-    *   @brief 
-    *   @param msg - 
+    *   @brief arCallback function subscribes to ARtag marker topic
+    *   and gets the relative position of them. 
+    *   @param msg - markers
     */
     void aRCallback(const ar_track_alvar_msgs::AlvarMarkers::ConstPtr &msg);
     /*
-    *   @brief 
-    *   @param msg - 
+    *   @brief threatCallBack - Subscribes to threat detection messages
+    *   from ThreatGen Class
+    *   @param - geometry_msgs data 
     */
     void threatCallback(const geometry_msgs::Pose2D::ConstPtr &data);
     /*
-    *   @brief 
-    *   @param msg - 
+    *   @brief run - runs the planner node with waypoints and publishes 
+    *   waypoints to controller
+    *   @param bool flag to indicate TESTING
     */
     void run(bool TEST=false);
     /*
-    *   @brief 
-    *   @param msg - 
+    *   @brief flag Call Back function subscribes to odometry data
+    *   @param msg - Odometry data 
     */
     void flagCallBack(const nav_msgs::Odometry::ConstPtr &data);
 };

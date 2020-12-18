@@ -1,11 +1,24 @@
+/**
+ * @file test_Planner.cpp
+ * @author Sneha Nayak
+ * @author Vishnuu
+ * @author Vasista
+ * @brief Class tests the PID module
+ * @date 2020-12-01
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #include <gtest/gtest.h>
 #include <ros/ros.h>
 #include <Planner.h>
 #include <tf2_ros/static_transform_broadcaster.h>
 #include <geometry_msgs/TransformStamped.h>
 
-class PlannerTest
-{
+/**
+* @brief PlannerTest is class defined to help with testing
+*       of planner module
+*/
+class PlannerTest {
 private:
     ros::NodeHandle nh_;
 
@@ -16,9 +29,13 @@ private:
 public:
     bool TEST, goal_ack;
     geometry_msgs::Pose2D set_point;
-    PlannerTest(const ros::NodeHandle &n, bool useVision)
-        : nh_(n)
-    {
+    /**
+    * @brief PlannerTest constructor
+    * @param Node handle object
+    * @param useVision flag
+    */
+    PlannerTest (const ros::NodeHandle &n, bool useVision)
+        : nh_(n) {
         useVision_ = useVision;
         sub_goal_ = nh_.subscribe("/move_base_simple/goal",
                                   1, &PlannerTest::GoalCallback, this);
@@ -33,13 +50,22 @@ public:
         }
     }
 
+    /**
+    * @brief GoalCallBack function is a subscriber callback to goal sent
+    *  by planner
+    * @param callback msg
+    */
     void GoalCallback(const geometry_msgs::Pose2D::ConstPtr &data)
     {
 
         set_point.x = data->x;
         set_point.y = data->y;
     }
-
+    /**
+    * @brief publish is a publisher to test the subscribers of Planner
+    * @param odom msg, ar_markers_msg, ar_pose_msg, max_count
+    * @return None
+    */
     void publish(nav_msgs::Odometry odom_msg, ar_track_alvar_msgs::AlvarMarkers ar_marker_msg, geometry_msgs::Pose2D ar_pose_msg, int max_count)
     {
         ros::Rate loop_rate(10);
@@ -63,6 +89,11 @@ public:
 
 };
 
+/**
+* @brief checkUseVision Test case that tests planner 
+* while using vision based detection 
+* @param checkUseVision flag
+*/
 TEST(PlannerTest, chechUseVision)
 {
     ros::NodeHandle nh;
@@ -102,6 +133,11 @@ TEST(PlannerTest, chechUseVision)
 
     EXPECT_NO_FATAL_FAILURE(planner.run(true));
 }
+/**
+* @brief checkWithoutVision Test case that tests planner 
+* while not using vision based detection 
+* @param checkUseVision flag
+*/
 TEST(PlannerTest, chechWithoutVision)
 {
     ros::NodeHandle nh;
