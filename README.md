@@ -8,9 +8,9 @@
 
 ## Project contibutors
 
-1) [Sneha Nayak](https://github.com/snehanyk05)
-2) [Vasista Ayyagari](https://github.com/clueless-bachu)
-3) [Vishnuu A. Dhanabalan](https://github.com/vishnuu95)
+1) [Sneha Nayak](https://github.com/snehanyk05): 2nd year Mengg Robotics @UMD. Interests: Machine Learning, Reinforcement Learning, Motion Planning.
+2) [Vasista Ayyagari](https://github.com/clueless-bachu): 1st year Mengg Robotics @UMD. Interests: Computer Vision, Path Planning.
+3) [Vishnuu A. Dhanabalan](https://github.com/vishnuu95): 2nd year Mengg Robotics @UMD. Interests: Computer Vision, Autonomy.
 
 ## Agile Iterative Process
 [![Solo Iterative Process](https://img.shields.io/badge/AIP-ClickHere-brightgreen.svg?style=flat)](https://docs.google.com/spreadsheets/d/1xvJm1XwD0x-FWnv0wH0hJFpIkV3F_uvVeWk7_voXG9g/edit?ts=5fc43c5c#gid=0) 
@@ -26,13 +26,18 @@ https://www.youtube.com/watch?v=feeuLlQeejQ
 
 ## Overview
 
-Awesom-O is an autonomous threat detection and response robot who’s main objective is to de-tect threats and accordingly eliminate them.  The robot scans the environment, detects potentialthreats which are marked with an AruCo marker.  The Awesom-O then proceeds to autonomouslynavigate towards the object of interest (or threat) while avoiding collision with other obstacles inthe  environment.   When  it  is  within  a  certain  radius  of  the  object  of  interest,  it  disarms  it  andmoves on to its next target, thus eliminating all threats in the environment
+Awesom-O is an autonomous threat detection and response robot who’s main objective is to de-tect threats and accordingly eliminate them.  The robot scans the environment, detects potentialthreats which are marked with an AruCo marker.  The Awesom-O then proceeds to autonomouslynavigate towards the object of interest (or threat) while avoiding collision with other obstacles inthe  environment.  When  it  is  within  a  certain  radius  of  the  object  of  interest,  it  disarms  it  andmoves on to its next target, thus eliminating all threats in the environment. 
+
+We managed to implement two methods in which the robot can accurately detect its threats. One is the vision based technique, where the robot can detect it's threat, which is in the form of an arTag with an associated ID. The robot detects all ar tags in its map/environment before it can say that it's "mission" was complete. In the vicinity based method, the robot detects threats when it approches close to the target, and diverges from it's predefined path to disarm the target threat.
 
 We intend on creating a robust set of test cases with:
 
 - cmake
 - gtest
 - rostest
+
+#### Threat Detection Sample Image
+![Fig1. Threat Detection](https://github.com/clueless-bachu/Awesom-O/blob/master/output/image.png)
 
 ## Dependencies
 
@@ -41,6 +46,8 @@ We intend on creating a robust set of test cases with:
 * CMake (Build System)
 * OpenCV >= 4.4 
 * ROS Melodic
+* Gazebo
+* ar_track_alvar ROS package
 
 ## License 
 
@@ -68,13 +75,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-## Standard install via command-line
+## Standard install via command-line Vision Based
 
 ```
 cd <<Your_catkin_workspace>>/src
 git clone --recursive https://github.com/snehanyk05/Awesom-O/
 cd ../..
-catkin_make
+export TURTLEBOT3_MODEL=waffle
+catkin_make && source devel/setup.bash
+roslaunch awesomo test.launch useVision:=true
+```
+
+## Standard install via command-line Vicinity Based
+
+```
+cd <<Your_catkin_workspace>>/src
+git clone --recursive https://github.com/snehanyk05/Awesom-O/
+cd ../..
+export TURTLEBOT3_MODEL=waffle
+catkin_make && source devel/setup.bash
+roslaunch awesomo test.launch useVision:=false
+```
+## Run Tests 
+```
+catkin_make run_tests_awesomo
 ```
 
 ## Building for code coverage
@@ -104,7 +128,4 @@ cd docs
 cd html
 google-chrome index.html
 ```
-## Run Tests 
-```
-catkin_make run_tests_awesomo
-```
+
