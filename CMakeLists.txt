@@ -102,6 +102,7 @@ add_dependencies(threatGen awesomo_generate_messages_cpp)
 
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 --coverage")
   add_rostest_gtest(testAwesomO 
   test/test_main.test
   test/test_main.cpp 
