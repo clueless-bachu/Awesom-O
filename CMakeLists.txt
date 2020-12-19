@@ -13,7 +13,9 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   sensor_msgs
   std_msgs
+  nav_msgs
   message_generation
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -75,6 +77,7 @@ generate_messages(
    std_msgs
    geometry_msgs
    sensor_msgs
+   nav_msgs
 )
 
 ## Declare a catkin package
@@ -83,24 +86,34 @@ catkin_package()
 ## Build 
 include_directories(include ${catkin_INCLUDE_DIRS})
 
-add_executable(Planner src/Planner.cpp)
+add_executable(Planner src/Planner_main.cpp src/Planner.cpp)
 target_link_libraries(Planner ${catkin_LIBRARIES})
 add_dependencies(Planner awesomo_generate_messages_cpp)
 
-add_executable(Controller src/Controller.cpp)
+add_executable(Controller src/Controller_main.cpp src/Controller.cpp src/PID.cpp)
 target_link_libraries(Controller ${catkin_LIBRARIES})
 add_dependencies(Controller awesomo_generate_messages_cpp)
 
-
-add_executable(targetgen src/TargetGen.cpp)
-target_link_libraries(targetgen ${catkin_LIBRARIES})
-add_dependencies(targetgen awesomo_generate_messages_cpp)
+add_executable(threatGen src/threatGen_main.cpp src/threatGen.cpp)
+target_link_libraries(threatGen ${catkin_LIBRARIES})
+add_dependencies(threatGen awesomo_generate_messages_cpp)
 # add_e13
 # add_dependencies(add_two_ints_client beginner_tutorials_gencpp)
 
 if(CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
-  add_rostest_gtest(testAwesomO test/test_main.test test/test_main.cpp)
+  add_rostest_gtest(testAwesomO 
+  test/test_main.test
+  test/test_main.cpp 
+  test/test_Controller.cpp
+  test/test_PID.cpp
+  test/test_Planner.cpp
+  test/test_threatGen.cpp
+  src/Controller.cpp
+  src/PID.cpp
+  src/Planner.cpp
+  src/threatGen.cpp
+  )
   target_link_libraries(testAwesomO ${catkin_LIBRARIES})
   add_dependencies(Planner testAwesomO ${catkin_EXPORTED_TARGETS})
 endif()

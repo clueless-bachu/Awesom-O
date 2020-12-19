@@ -1,4 +1,14 @@
 Done processing ./src/Controller.cpp
+Done processing ./src/Controller_main.cpp
+Done processing ./src/PID.cpp
 Done processing ./src/Planner.cpp
+Done processing ./src/Planner_main.cpp
 Done processing ./src/TargetGen.cpp
+Done processing ./src/threatGen.cpp
+Done processing ./src/threatGen_main.cpp
+Done processing ./test/test_Controller.cpp
+Done processing ./test/test_PID.cpp
+Done processing ./test/test_Planner.cpp
 Done processing ./test/test_main.cpp
+Done processing ./test/test_threatGen.cpp
+Total errors found: 4

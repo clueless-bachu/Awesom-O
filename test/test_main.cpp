@@ -48,7 +48,11 @@ TEST(testNode, testResponse) {
   EXPECT_EQ("Test", "Test");
 }
 
-
+/**
+* @brief main
+* @param argc, argv
+* @return None
+*/
 int main(int argc, char** argv) {
     ros::init(argc, argv, "testAwesomO");
     ::testing::InitGoogleTest(&argc, argv);

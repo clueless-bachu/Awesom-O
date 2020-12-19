@@ -1,0 +1,19 @@
+<launch>
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+	<arg name="world_name" value="$(find awesomo)/worlds/test.world"/>
+</include>
+
+	<!-- <include file="$(find gazebo_ros)/launch/empty_world.launch"> -->
+    	<!-- <arg name="world_name" value="test_world_1.world"/> -->
+	<!-- </include>
+	<include file="$(find awesomo)/launch/boxes.launch"/> -->
+	<!-- <include file="$(find awesomo)/launch/boxes.launch"/> -->
+	<node pkg="tf" type="static_transform_publisher" name="map_to_base" args="1 0 0 0 0 0 1 map base_footprint 10" />
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+	<node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher" />
+
+	<include file="$(find awesomo)/launch/ar_tag.launch"/>
+	<node name="Controller" pkg="awesomo" type="Controller"/>
+	<node pkg="awesomo" name="Planner" type="Planner" />
+
+</launch>

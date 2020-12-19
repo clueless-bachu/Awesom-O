@@ -9,11 +9,7 @@
  * 
  */
 #include "TargetGen.h"
-/**
-* @brief getPosition method which is a service callback
-* @param req for service
-* @return response for service
-*/
+
 bool TargetGen::getPositions(awesomo::boxes::Request &req,
     awesomo::boxes::Response &res) {
     int num = req.numBoxes;
@@ -25,11 +21,7 @@ bool TargetGen::getPositions(awesomo::boxes::Request &req,
     // res.positions = positions;
     return true;
 }
-/**
-* @brief Constructor
-* @param None
-* @return None
-*/
+
 TargetGen::TargetGen(const ros::NodeHandle& n):
     nh_(n) {
     pub_poses_ = nh_.advertise<geometry_msgs::PoseStamped>
@@ -38,11 +30,7 @@ TargetGen::TargetGen(const ros::NodeHandle& n):
                         ("getPositions", this->getPositions);
     ROS_INFO("Inside constructor");
 }
-/**
-* @brief Destructor
-* @param None
-* @return None
-*/
+
 TargetGen::~TargetGen() {
 }
 /**
